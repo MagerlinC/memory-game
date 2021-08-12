@@ -4,6 +4,8 @@ import ThirdIcon from "./assets/tile-icons/2.svg";
 import FourthIcon from "./assets/tile-icons/3.svg";
 import FifthIcon from "./assets/tile-icons/4.svg";
 import SixthIcon from "./assets/tile-icons/5.svg";
+import SeventhIcon from "./assets/tile-icons/6.svg";
+import EighthIcon from "./assets/tile-icons/7.svg";
 
 export const TILE_ICONS = [
   FirstIcon,
@@ -12,6 +14,8 @@ export const TILE_ICONS = [
   FourthIcon,
   FifthIcon,
   SixthIcon,
+  SeventhIcon,
+  EighthIcon,
 ];
 
 // Knuth Shuffle

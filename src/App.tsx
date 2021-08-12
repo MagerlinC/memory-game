@@ -4,7 +4,7 @@ import Board from "./components/board/board";
 
 function App() {
   // Number of differnt icon pairs
-  const numPairs = 6;
+  const numPairs = 8;
   return (
     <div className="App">
       <header className="App-header">

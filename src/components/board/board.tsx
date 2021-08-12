@@ -10,6 +10,15 @@ type BoardProps = {
 };
 
 function Board({ boardSize }: BoardProps) {
+  // *** CONFIG VARS ***
+
+  // Variable for toggling shuffling on/off. Having a non-shuffled list is useful for debugging.
+  const DO_SHUFFLE_TILES = true;
+  // Duration a new board of tiles is revealed for
+  const REVEAL_DURATION = 5000;
+
+  // *** END CONFIG VARS ***
+
   // Initial indexes for distribution of tiles. This will later be randomized for games to be... Well, playable.
   const initialTileIndexes: number[] = [];
 
@@ -17,10 +26,6 @@ function Board({ boardSize }: BoardProps) {
     initialTileIndexes.push(i);
   }
   const [tileIndexes, setTileIndexes] = useState<number[]>(initialTileIndexes);
-
-  // Variable for toggling shuffling on/off. Having a non-shuffled list is useful for debugging.
-  const DO_SHUFFLE_TILES = true;
-
   const [isFirstGame, setIsFirstGame] = useState<boolean>(true);
   const [attempts, setAttempts] = useState<number>(boardSize);
   const [points, setPoints] = useState<number>(0);
@@ -86,7 +91,7 @@ function Board({ boardSize }: BoardProps) {
       setTimeout(() => {
         setAllShown(false);
         setStartGameBtnLocked(false);
-      }, 5000);
+      }, REVEAL_DURATION);
     }
   };
 
@@ -188,7 +193,7 @@ function Board({ boardSize }: BoardProps) {
         {allShown ? (
           <div className="timer-running-section">
             <div className="timer-text">Tiles Revealed!</div>
-            <TimerBar duration={5}></TimerBar>
+            <TimerBar duration={REVEAL_DURATION / 1000}></TimerBar>
           </div>
         ) : (
           <div className={"timer-bar-spacer"} />
