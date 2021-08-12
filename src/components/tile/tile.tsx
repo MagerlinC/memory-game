@@ -15,9 +15,13 @@ function Tile({ iconPath, onClick, shown, wrong }: TileProps) {
       className={"tile" + (shown ? " shown" : "") + (wrong ? " wrong" : "")}
     >
       <div className={"tile-icon-wrapper"}>
-        {shown && (
-          <img alt="tile-icon" className={"tile-icon"} src={iconPath}></img>
-        )}
+        {
+          <img
+            alt="tile-icon"
+            className={"tile-icon" + (!shown ? " hidden" : "")}
+            src={iconPath}
+          ></img>
+        }
       </div>
     </div>
   );

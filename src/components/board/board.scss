@@ -30,6 +30,7 @@
   .board-tiles {
     margin: 66px;
     display: grid;
+    grid-auto-rows: 1fr;
     grid-gap: 50px;
     justify-items: center;
     min-height: 50vh;
