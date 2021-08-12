@@ -32,7 +32,7 @@ function Board({ boardSize }: BoardProps) {
   // Side effect: When shown tiles are updated, check if we have won
   useEffect(() => {
     // We have won if all tiles are shown
-    if (shownTiles.length == boardSize * 2) {
+    if (shownTiles.length === boardSize * 2) {
       setWins(wins + 1);
       setHasWon(true);
       setGameStarted(false);
@@ -40,7 +40,8 @@ function Board({ boardSize }: BoardProps) {
   }, [shownTiles]);
 
   useEffect(() => {
-    if (attempts <= 0) {
+    // No more attempts, and haven't won
+    if (attempts <= 0 && shownTiles.length !== boardSize * 2) {
       setHasLost(true);
       setGameStarted(false);
     }
