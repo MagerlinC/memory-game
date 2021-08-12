@@ -12,6 +12,8 @@ type BoardProps = {
 function Board({ boardSize }: BoardProps) {
   // Initial indexes for distribution of tiles. This will later be randomized for games to be... Well, playable.
   const initialTileIndexes: number[] = [];
+  // Variable for 5 second reveal to be cancelled if the user spam clicks the button
+
   for (let i = 0; i < boardSize * 2; i++) {
     initialTileIndexes.push(i);
   }
@@ -26,6 +28,7 @@ function Board({ boardSize }: BoardProps) {
   const [wins, setWins] = useState<number>(0);
   const [hasWon, setHasWon] = useState<boolean>(false);
   const [hasLost, setHasLost] = useState<boolean>(false);
+  const [startGameBtnLocked, setStartGameBtnLocked] = useState<boolean>(false);
 
   const [shownTiles, setShownTiles] = useState<
     { index: number; icon: string }[]
@@ -58,6 +61,7 @@ function Board({ boardSize }: BoardProps) {
   }, [attempts]);
 
   const clearForNewGame = () => {
+    setWrongIndexes([]);
     setShownTiles([]);
     setPoints(0);
     setAttempts(6);
@@ -66,18 +70,25 @@ function Board({ boardSize }: BoardProps) {
   };
 
   const startGame = () => {
-    if (DO_SHUFFLE_TILES) {
-      // Shuffle the tiles for actual games
-      const shuffledArray = shuffle(tileIndexes);
-      setTileIndexes(shuffledArray);
+    if (!startGameBtnLocked) {
+      setStartGameBtnLocked(true);
+      if (DO_SHUFFLE_TILES) {
+        // Shuffle the tiles for actual games
+        const shuffledArray = shuffle(tileIndexes);
+        setTileIndexes(shuffledArray);
+      }
+      if (isFirstGame) {
+        setIsFirstGame(false);
+      }
+      clearForNewGame();
+      setGameStarted(true);
+      setAllShown(true);
+
+      setTimeout(() => {
+        setAllShown(false);
+        setStartGameBtnLocked(false);
+      }, 5000);
     }
-    if (isFirstGame) {
-      setIsFirstGame(false);
-    }
-    clearForNewGame();
-    setGameStarted(true);
-    setAllShown(true);
-    setTimeout(() => setAllShown(false), 5000);
   };
 
   const onTileClick = (tileIndex: number, selectedIcon: string) => {
@@ -158,7 +169,11 @@ function Board({ boardSize }: BoardProps) {
         </div>
       </div>
 
-      <button onClick={startGame} className="begin-btn">
+      <button
+        disabled={startGameBtnLocked}
+        onClick={startGame}
+        className={"begin-btn" + (startGameBtnLocked ? " disabled" : "")}
+      >
         {isFirstGame ? "Begin" : "New Game"}
       </button>
 

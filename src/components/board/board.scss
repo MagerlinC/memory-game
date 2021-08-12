@@ -16,6 +16,10 @@
   }
   .begin-btn {
     margin: 12px 0;
+    &.disabled {
+      background-color: lightgrey;
+      cursor: unset;
+    }
   }
   .timer-section {
     min-height: 50px;
