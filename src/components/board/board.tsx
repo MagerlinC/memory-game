@@ -3,13 +3,23 @@ import "./board.scss";
 import Tile from "../tile/tile";
 import TimerBar from "../timer-bar/timer-bar";
 import Toaster from "../toaster/toaster";
-import { TILE_ICONS } from "../../util";
+import { shuffle, TILE_ICONS } from "../../util";
 
 type BoardProps = {
   boardSize: number;
 };
 
 function Board({ boardSize }: BoardProps) {
+  // Initial indexes for distribution of tiles. This will later be randomized for games to be... Well, playable.
+  const initialTileIndexes: number[] = [];
+  for (let i = 0; i < boardSize * 2; i++) {
+    initialTileIndexes.push(i);
+  }
+  const [tileIndexes, setTileIndexes] = useState<number[]>(initialTileIndexes);
+
+  // Variable for toggling shuffling on/off. Having a non-shuffled list is useful for debugging.
+  const DO_SHUFFLE_TILES = true;
+
   const [isFirstGame, setIsFirstGame] = useState<boolean>(true);
   const [attempts, setAttempts] = useState<number>(6);
   const [points, setPoints] = useState<number>(0);
@@ -56,6 +66,11 @@ function Board({ boardSize }: BoardProps) {
   };
 
   const startGame = () => {
+    if (DO_SHUFFLE_TILES) {
+      // Shuffle the tiles for actual games
+      const shuffledArray = shuffle(tileIndexes);
+      setTileIndexes(shuffledArray);
+    }
     if (isFirstGame) {
       setIsFirstGame(false);
     }
@@ -110,11 +125,6 @@ function Board({ boardSize }: BoardProps) {
       setGameLocked(false);
     }, 2000);
   };
-
-  const tileIndexes: number[] = [];
-  for (let i = 0; i < boardSize * 2; i++) {
-    tileIndexes.push(i);
-  }
 
   // Dynamic amount of cols based on board size
   const gridColString = "1fr ".repeat(boardSize / 2);
