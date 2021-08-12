@@ -1,13 +1,14 @@
 .board {
+  display: flex;
+  flex-direction: column;
   .game-stats {
-    margin: 18px 0;
+    margin: 18px 66px;
+    align-self: left;
+    text-align: left;
     display: flex;
-    flex-direction: row;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
     .attempts-text {
-      flex-grow: 1;
+      margin-right: 18px;
+      flex-grow: 0;
       padding: 4px 0;
     }
     .stats-text {
@@ -15,6 +16,8 @@
     }
   }
   .begin-btn {
+    align-self: center;
+    max-width: 250px;
     margin: 12px 0;
     &.disabled {
       background-color: lightgrey;
@@ -32,6 +35,8 @@
     height: 12px;
   }
   .board-tiles {
+    align-self: center;
+    width: 100%;
     margin: 66px;
     display: grid;
     grid-auto-rows: 1fr;

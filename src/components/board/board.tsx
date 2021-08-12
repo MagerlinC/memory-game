@@ -96,13 +96,15 @@ function Board({ boardSize }: BoardProps) {
     // If CurIconPair was not empty, we are doing the 2nd selection
     if (curIconPair !== "") {
       isWrongChoice = selectedIcon !== curIconPair;
-      if (!isWrongChoice) {
+      if (isWrongChoice) {
+        // Lower attempts when making a mistake
+        setAttempts(attempts - 1);
+      } else {
         // Right choice! Add points
         setPoints(points + 10);
       }
       // Clear after 2 selections
       setCurIconPair("");
-      setAttempts(attempts - 1);
     } else {
       setCurIconPair(selectedIcon);
     }
@@ -172,7 +174,13 @@ function Board({ boardSize }: BoardProps) {
       <button
         disabled={startGameBtnLocked}
         onClick={startGame}
-        className={"begin-btn" + (startGameBtnLocked ? " disabled" : "")}
+        className={
+          "begin-btn animate__animated " +
+          (startGameBtnLocked ? " disabled" : "") +
+          (isFirstGame && !startGameBtnLocked
+            ? "animate__infinite animate__pulse"
+            : "")
+        }
       >
         {isFirstGame ? "Begin" : "New Game"}
       </button>
