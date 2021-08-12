@@ -12,7 +12,6 @@ type BoardProps = {
 function Board({ boardSize }: BoardProps) {
   // Initial indexes for distribution of tiles. This will later be randomized for games to be... Well, playable.
   const initialTileIndexes: number[] = [];
-  // Variable for 5 second reveal to be cancelled if the user spam clicks the button
 
   for (let i = 0; i < boardSize * 2; i++) {
     initialTileIndexes.push(i);
