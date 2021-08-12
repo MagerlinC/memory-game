@@ -120,6 +120,9 @@ function Board({ boardSize }: BoardProps) {
 
   const tileIcons = [FirstIcon, SecondIcon, ThirdIcon, FourthIcon];
 
+  // Dynamic amount of cols based on board size
+  const gridColString = "1fr ".repeat(boardSize / 2);
+
   return (
     <div className="board">
       <Toaster
@@ -158,7 +161,10 @@ function Board({ boardSize }: BoardProps) {
       ) : (
         <div className={"timer-bar-spacer"} />
       )}
-      <div className={"board-tiles"}>
+      <div
+        style={{ gridTemplateColumns: gridColString }}
+        className={"board-tiles"}
+      >
         {tileIndexes.map((index) => (
           <Tile
             key={"tile" + index}

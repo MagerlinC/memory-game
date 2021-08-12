@@ -9,7 +9,7 @@ function App() {
         <div className="welcome-section">Welcome to the Memory Game!</div>
       </header>
       <div className="body">
-        <Board boardSize={4}></Board>
+        <Board boardSize={6}></Board>
       </div>
     </div>
   );
