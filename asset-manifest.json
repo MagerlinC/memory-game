@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/memory-game/static/css/main.cedb33e2.chunk.css",
+    "main.js": "/memory-game/static/js/main.0674d19a.chunk.js",
+    "main.js.map": "/memory-game/static/js/main.0674d19a.chunk.js.map",
+    "runtime-main.js": "/memory-game/static/js/runtime-main.a068ebd5.js",
+    "runtime-main.js.map": "/memory-game/static/js/runtime-main.a068ebd5.js.map",
+    "static/js/2.46369402.chunk.js": "/memory-game/static/js/2.46369402.chunk.js",
+    "static/js/2.46369402.chunk.js.map": "/memory-game/static/js/2.46369402.chunk.js.map",
+    "static/js/3.aa99ae70.chunk.js": "/memory-game/static/js/3.aa99ae70.chunk.js",
+    "static/js/3.aa99ae70.chunk.js.map": "/memory-game/static/js/3.aa99ae70.chunk.js.map",
+    "index.html": "/memory-game/index.html",
+    "static/css/main.cedb33e2.chunk.css.map": "/memory-game/static/css/main.cedb33e2.chunk.css.map",
+    "static/js/2.46369402.chunk.js.LICENSE.txt": "/memory-game/static/js/2.46369402.chunk.js.LICENSE.txt",
+    "static/media/0.1574e2c5.svg": "/memory-game/static/media/0.1574e2c5.svg",
+    "static/media/1.54796f59.svg": "/memory-game/static/media/1.54796f59.svg",
+    "static/media/2.e3fed5bf.svg": "/memory-game/static/media/2.e3fed5bf.svg",
+    "static/media/3.e213b0fd.svg": "/memory-game/static/media/3.e213b0fd.svg",
+    "static/media/4.e6a53072.svg": "/memory-game/static/media/4.e6a53072.svg",
+    "static/media/5.0825e0a1.svg": "/memory-game/static/media/5.0825e0a1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a068ebd5.js",
+    "static/js/2.46369402.chunk.js",
+    "static/css/main.cedb33e2.chunk.css",
+    "static/js/main.0674d19a.chunk.js"
+  ]
+}
