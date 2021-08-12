@@ -28,7 +28,7 @@ function Toaster({ title, bodyText, shown, hideAfter }: ToasterProps) {
       </div>
     </div>
   ) : (
-    <div className="empty"></div>
+    <div className="toaster-empty"></div>
   );
 }
 export default Toaster;

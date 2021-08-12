@@ -28,8 +28,10 @@
     height: 12px;
   }
   .board-tiles {
+    margin: 66px;
     display: grid;
     grid-gap: 50px;
     justify-items: center;
+    min-height: 50vh;
   }
 }
