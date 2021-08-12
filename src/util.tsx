@@ -1,3 +1,19 @@
+import FirstIcon from "./assets/tile-icons/0.svg";
+import SecondIcon from "./assets/tile-icons/1.svg";
+import ThirdIcon from "./assets/tile-icons/2.svg";
+import FourthIcon from "./assets/tile-icons/3.svg";
+import FifthIcon from "./assets/tile-icons/4.svg";
+import SixthIcon from "./assets/tile-icons/5.svg";
+
+export const TILE_ICONS = [
+  FirstIcon,
+  SecondIcon,
+  ThirdIcon,
+  FourthIcon,
+  FifthIcon,
+  SixthIcon,
+];
+
 // Knuth Shuffle
 export const shuffle = (array: Array<any>) => {
   var currentIndex = array.length,

@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./board.scss";
 import Tile from "../tile/tile";
 import TimerBar from "../timer-bar/timer-bar";
-import FirstIcon from "../../assets/tile-icons/0.svg";
-import SecondIcon from "../../assets/tile-icons/1.svg";
-import ThirdIcon from "../../assets/tile-icons/2.svg";
-import FourthIcon from "../../assets/tile-icons/3.svg";
 import Toaster from "../toaster/toaster";
+import { TILE_ICONS } from "../../util";
 
 type BoardProps = {
   boardSize: number;
@@ -110,15 +107,13 @@ function Board({ boardSize }: BoardProps) {
       setShownTiles(newTilesShown);
       setWrongIndexes([]);
       setGameLocked(false);
-    }, 2500);
+    }, 2000);
   };
 
   const tileIndexes: number[] = [];
   for (let i = 0; i < boardSize * 2; i++) {
     tileIndexes.push(i);
   }
-
-  const tileIcons = [FirstIcon, SecondIcon, ThirdIcon, FourthIcon];
 
   // Dynamic amount of cols based on board size
   const gridColString = "1fr ".repeat(boardSize / 2);
@@ -156,11 +151,17 @@ function Board({ boardSize }: BoardProps) {
         {isFirstGame ? "Begin" : "New Game"}
       </button>
 
-      {allShown ? (
-        <TimerBar duration={5}></TimerBar>
-      ) : (
-        <div className={"timer-bar-spacer"} />
-      )}
+      <div className="timer-section">
+        {allShown ? (
+          <div className="timer-running-section">
+            <div className="timer-text">Tiles Revealed!</div>
+            <TimerBar duration={5}></TimerBar>
+          </div>
+        ) : (
+          <div className={"timer-bar-spacer"} />
+        )}
+      </div>
+
       <div
         style={{ gridTemplateColumns: gridColString }}
         className={"board-tiles"}
@@ -171,11 +172,15 @@ function Board({ boardSize }: BoardProps) {
             wrong={
               wrongIndexes.find((tileIndex) => tileIndex === index) != null
             }
-            iconPath={tileIcons[Math.floor(index / 2)]}
-            // Only fire onClicks once the game has started, and all tiles are done being shown
+            iconPath={TILE_ICONS[Math.floor(index / 2)]}
             onClick={() =>
-              !gameLocked && gameStarted && !allShown
-                ? onTileClick(index, tileIcons[Math.floor(index / 2)])
+              // Only fire onClicks once the game has started, and all tiles are done being shown
+              !gameLocked &&
+              gameStarted &&
+              !allShown &&
+              // Don't fire clicks on tiles that are already shown
+              shownTiles.find((shownTile) => shownTile.index === index) == null
+                ? onTileClick(index, TILE_ICONS[Math.floor(index / 2)])
                 : undefined
             }
             shown={
