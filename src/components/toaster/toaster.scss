@@ -1,5 +1,4 @@
 .toaster {
-  background-color: white;
   position: absolute;
   z-index: 2;
   bottom: 10vh;
@@ -7,6 +6,7 @@
   transform: translateX(-50%);
 
   .toaster-contents {
+    background-color: white;
     border: 1px solid black;
     border-radius: 8px;
     padding: 66px;
