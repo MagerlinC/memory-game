@@ -21,7 +21,7 @@ function Board({ boardSize }: BoardProps) {
   const DO_SHUFFLE_TILES = true;
 
   const [isFirstGame, setIsFirstGame] = useState<boolean>(true);
-  const [attempts, setAttempts] = useState<number>(6);
+  const [attempts, setAttempts] = useState<number>(boardSize);
   const [points, setPoints] = useState<number>(0);
   const [wins, setWins] = useState<number>(0);
   const [hasWon, setHasWon] = useState<boolean>(false);
@@ -140,7 +140,7 @@ function Board({ boardSize }: BoardProps) {
       <Toaster
         shown={hasLost}
         title="Aww, you lost!"
-        bodyText="Click New Game to play again"
+        bodyText="You ran out of attempts. Click New Game to play again"
         hideAfter={5000}
       />
       <div className={"game-stats"}>
