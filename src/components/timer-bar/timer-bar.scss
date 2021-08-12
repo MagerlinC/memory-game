@@ -1,0 +1,17 @@
+@import "../../variables.scss";
+
+@keyframes roundtime {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.timer-bar {
+  display: flex;
+  flex-direction: column;
+  .inner {
+    height: 12px;
+    background: linear-gradient(to bottom, $color_main, $color_highlight);
+    transform-origin: left center;
+  }
+}

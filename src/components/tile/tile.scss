@@ -1,0 +1,27 @@
+.tile {
+  background-color: #756392;
+  cursor: pointer;
+  position: relative;
+  border-radius: 6px;
+  min-width: 100px;
+  height: 100px;
+  transition: all 0.1s ease-in;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &.shown {
+    cursor: unset;
+    transform: none;
+    background-color: #a48ccb;
+  }
+  &.wrong {
+    background-color: #bf616a;
+  }
+  .tile-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+  }
+}

@@ -1,0 +1,18 @@
+.toaster {
+  position: absolute;
+  z-index: 2;
+  bottom: 10vh;
+  left: 50vw;
+  transform: translateX(-50%);
+
+  .toaster-contents {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 66px;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 18px;
+  }
+}
