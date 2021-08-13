@@ -3,7 +3,7 @@ import "./board.scss";
 import Tile from "../tile/tile";
 import TimerBar from "../timer-bar/timer-bar";
 import Toaster from "../toaster/toaster";
-import { shuffle, TILE_ICONS } from "../../util";
+import { getClosestDivisors, shuffle, TILE_ICONS } from "../../util";
 
 type BoardProps = {
   boardSize: number;
@@ -155,8 +155,21 @@ function Board({ boardSize }: BoardProps) {
     }, WRONG_SELECTION_VIEW_DURATION);
   };
 
-  // Dynamic amount of cols based on board size
-  const gridColString = "1fr ".repeat(Math.round(boardSize / 2));
+  // Get closest divisors of boardsize (ie 12 = 3 x 4)
+  const divisors = getClosestDivisors(boardSize * 2);
+
+  // Prefer wider layouts (ie 4 x 3 over 4 x 3)
+  const gridColString = "1fr ".repeat(
+    Math.round(Math.max(divisors.a, divisors.b))
+  );
+
+  const isMobile = window.innerWidth <= 800;
+
+  // 80vw for mobile, 60vh for desktop
+  const boardBaseSize = isMobile ? 80 : 60;
+
+  const widthFactor =
+    Math.max(divisors.a, divisors.b) / Math.min(divisors.a, divisors.b);
 
   return (
     <div className="board">
@@ -213,7 +226,11 @@ function Board({ boardSize }: BoardProps) {
       </div>
 
       <div
-        style={{ gridTemplateColumns: gridColString }}
+        style={{
+          gridTemplateColumns: gridColString,
+          width: boardBaseSize * widthFactor + (isMobile ? "vw" : "vh"),
+          height: boardBaseSize + (isMobile ? "vw" : "vh"),
+        }}
         className={"board-tiles"}
       >
         {tileIndexes.map((index) => (

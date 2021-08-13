@@ -40,3 +40,28 @@ export const shuffle = (array: Array<any>) => {
 
   return array;
 };
+// Get the two closest divisors of a given number.
+// For example, given 12, return 3 and 4.
+export const getClosestDivisors = (num: number): { a: number; b: number } => {
+  let lo = 1;
+  let hi = num;
+  let divA = NaN;
+  let divB = NaN;
+  while (hi >= lo) {
+    const product = lo * hi;
+    if (product === num) {
+      divA = lo;
+      divB = hi;
+      // When we hit a match, try next from hi and down
+      hi--;
+    } else if (product > num) {
+      // Too big, reduce hi
+      hi--;
+    } else {
+      // Too small, raise lo
+      lo++;
+    }
+  }
+  console.log(num, divA, divB);
+  return { a: divA, b: divB };
+};

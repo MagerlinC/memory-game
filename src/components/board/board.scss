@@ -42,17 +42,8 @@
   }
   .board-tiles {
     align-self: center;
-    width: 100%;
     display: grid;
     grid-gap: 2vw;
     justify-items: center;
-    height: 60vh;
-    width: 60vh;
-  }
-  @media (max-width: 800px) {
-    .board-tiles {
-      height: 80vw;
-      width: 80vw;
-    }
   }
 }
