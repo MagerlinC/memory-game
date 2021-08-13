@@ -32,6 +32,7 @@ function Board({ boardSize }: BoardProps) {
   }
   const [tileIndexes, setTileIndexes] = useState<number[]>(initialTileIndexes);
   const [isFirstGame, setIsFirstGame] = useState<boolean>(true);
+  // Discussion Point: How do attempts grow with number of pairs/boardsize?
   const [attempts, setAttempts] = useState<number>(boardSize);
   const [points, setPoints] = useState<number>(0);
   const [wins, setWins] = useState<number>(0);
