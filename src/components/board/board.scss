@@ -43,11 +43,16 @@
   .board-tiles {
     align-self: center;
     width: 100%;
-    margin: 66px;
     display: grid;
-    grid-auto-rows: 1fr;
-    grid-gap: 50px;
+    grid-gap: 2vw;
     justify-items: center;
-    min-height: 50vh;
+    height: 60vh;
+    width: 60vh;
+  }
+  @media (max-width: 800px) {
+    .board-tiles {
+      height: 80vw;
+      width: 80vw;
+    }
   }
 }
