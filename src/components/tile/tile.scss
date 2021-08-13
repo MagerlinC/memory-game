@@ -22,10 +22,19 @@
   &.wrong {
     background-color: #bf616a;
   }
-  .tile-icon {
-    flex-grow: 1;
-    &.hidden {
-      opacity: 0;
+  .tile-icon-wrapper {
+    position: relative;
+    .tile-icon,
+    .tile-icon-spacer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: 6vh;
+      &.hidden {
+        opacity: 0;
+      }
     }
   }
 }

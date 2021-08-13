@@ -16,7 +16,10 @@ function Board({ boardSize }: BoardProps) {
   const DO_SHUFFLE_TILES = true;
   // Duration a new board of tiles is revealed for
   const REVEAL_DURATION = 5000;
-
+  // Discussion Point: Should a correct selection cost an attempt?
+  const USE_ATTEMPT_ON_SUCCESS = false;
+  // Discussion Point: Should points reset when starting a new game?
+  const RESET_POINTS_ON_GAME_END = false;
   // *** END CONFIG VARS ***
 
   // Initial indexes for distribution of tiles. This will later be randomized for games to be... Well, playable.
@@ -50,7 +53,7 @@ function Board({ boardSize }: BoardProps) {
   useEffect(() => {
     // We have won if all tiles are shown
     if (shownTiles.length === boardSize * 2) {
-      setWins(wins + 1);
+      setWins((w) => w + 1);
       setHasWon(true);
       setGameStarted(false);
     }
@@ -67,7 +70,9 @@ function Board({ boardSize }: BoardProps) {
   const clearForNewGame = () => {
     setWrongIndexes([]);
     setShownTiles([]);
-    setPoints(0);
+    if (RESET_POINTS_ON_GAME_END) {
+      setPoints(0);
+    }
     setAttempts(6);
     setHasWon(false);
     setHasLost(false);
@@ -106,6 +111,10 @@ function Board({ boardSize }: BoardProps) {
       } else {
         // Right choice! Add points
         setPoints(points + 10);
+        if (USE_ATTEMPT_ON_SUCCESS) {
+          // Lower attempts if we want to spend attempts on correct choices
+          setAttempts(attempts - 1);
+        }
       }
       // Clear after 2 selections
       setCurIconPair("");
@@ -131,20 +140,20 @@ function Board({ boardSize }: BoardProps) {
     const newTilesShown: { index: number; icon: string }[] = [];
     shownTiles.forEach((tile) => {
       // Only carry over indexes that were not the two wrong choices
-      if (tile.index != indexA && tile.index != indexB) {
+      if (tile.index !== indexA && tile.index !== indexB) {
         newTilesShown.push(tile);
       }
     });
-    // Remove wrong indexes after 2500 ms
+    // Remove wrong indexes after 1500 ms
     setTimeout(() => {
       setShownTiles(newTilesShown);
       setWrongIndexes([]);
       setGameLocked(false);
-    }, 2000);
+    }, 1500);
   };
 
   // Dynamic amount of cols based on board size
-  const gridColString = "1fr ".repeat(boardSize / 2);
+  const gridColString = "1fr ".repeat(Math.round(boardSize / 2));
 
   return (
     <div className="board">

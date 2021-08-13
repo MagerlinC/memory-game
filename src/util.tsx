@@ -1,3 +1,5 @@
+// This is not great, and is kind of tedious to maintain.
+// There are ways to dynamically fetch a list of icons (such as using WebPack's require.context), but I did not want to spend time there.
 import FirstIcon from "./assets/tile-icons/0.svg";
 import SecondIcon from "./assets/tile-icons/1.svg";
 import ThirdIcon from "./assets/tile-icons/2.svg";
