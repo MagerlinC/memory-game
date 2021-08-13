@@ -155,20 +155,23 @@ function Board({ boardSize }: BoardProps) {
     }, WRONG_SELECTION_VIEW_DURATION);
   };
 
+  const isMobile = window.innerWidth <= 800;
+
   // Get closest divisors of boardsize (ie 12 = 3 x 4)
   const divisors = getClosestDivisors(boardSize * 2);
 
-  // Prefer wider layouts (ie 4 x 3 over 4 x 3)
+  // Prefer wider layouts on desktop, tall on mobile (ie 4 x 3 over 4 x 3)
   const gridColString = "1fr ".repeat(
-    Math.round(Math.max(divisors.a, divisors.b))
+    isMobile
+      ? Math.min(divisors.a, divisors.b)
+      : Math.max(divisors.a, divisors.b)
   );
 
-  const isMobile = window.innerWidth <= 800;
-
   // 80vw for mobile, 60vh for desktop
-  const boardBaseSize = isMobile ? 80 : 60;
+  const desktopBaseHeight = 60;
+  const mobileBaseWidth = 80;
 
-  const widthFactor =
+  const colRowFactor =
     Math.max(divisors.a, divisors.b) / Math.min(divisors.a, divisors.b);
 
   return (
@@ -228,8 +231,12 @@ function Board({ boardSize }: BoardProps) {
       <div
         style={{
           gridTemplateColumns: gridColString,
-          width: boardBaseSize * widthFactor + (isMobile ? "vw" : "vh"),
-          height: boardBaseSize + (isMobile ? "vw" : "vh"),
+          width: isMobile
+            ? mobileBaseWidth + "vw"
+            : colRowFactor * desktopBaseHeight + "vh",
+          height: isMobile
+            ? mobileBaseWidth * colRowFactor + "vw"
+            : desktopBaseHeight + "vh",
         }}
         className={"board-tiles"}
       >

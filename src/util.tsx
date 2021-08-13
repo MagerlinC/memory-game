@@ -62,6 +62,5 @@ export const getClosestDivisors = (num: number): { a: number; b: number } => {
       lo++;
     }
   }
-  console.log(num, divA, divB);
   return { a: divA, b: divB };
 };
