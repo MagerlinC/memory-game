@@ -16,6 +16,8 @@ function Board({ boardSize }: BoardProps) {
   const DO_SHUFFLE_TILES = true;
   // Duration a new board of tiles is revealed for
   const REVEAL_DURATION = 5000;
+  // Time before a wrongful selection dissapears
+  const WRONG_SELECTION_VIEW_DURATION = 1500;
   // Discussion Point: Should a correct selection cost an attempt?
   const USE_ATTEMPT_ON_SUCCESS = false;
   // Discussion Point: Should points reset when starting a new game?
@@ -144,12 +146,12 @@ function Board({ boardSize }: BoardProps) {
         newTilesShown.push(tile);
       }
     });
-    // Remove wrong indexes after 1500 ms
+    // Remove wrong indexes after WRONG_SELECTION_VIEW_DURATION ms
     setTimeout(() => {
       setShownTiles(newTilesShown);
       setWrongIndexes([]);
       setGameLocked(false);
-    }, 1500);
+    }, WRONG_SELECTION_VIEW_DURATION);
   };
 
   // Dynamic amount of cols based on board size
